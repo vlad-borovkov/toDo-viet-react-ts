@@ -1,12 +1,18 @@
 import React from 'react';
 import TaskLine from '../TaskLine/TaskLine';
 
-export default function TaskList() {
+export default function TaskList(props) {
+  const { activeTasks, handleOpenAboutTask } = props;
+  // добавить спинер
   return (
     <div className='task-list'>
-      <TaskLine />
-      <TaskLine />
-      <TaskLine />
+      {activeTasks.map((item) => (
+        <TaskLine
+          key={item.id}
+          taskItem={item}
+          handleOpenAboutTask={handleOpenAboutTask}
+        />
+      ))}
     </div>
   );
 }

@@ -2,24 +2,32 @@ import React from 'react';
 import InfoTooltip from './InfoTooltip';
 
 export default function AboutTask(props) {
-  const isOpen = true;
+  const { isOpen, onClose, taskItem } = props;
+
   return (
     <InfoTooltip
       name='about-task'
       onClose='about-task-close'
       isOpen={isOpen}
-      closeAllPopups={props.onClose}
+      closeInfoTip={onClose}
     >
       <form className='about-task__wrap'>
-        <div>
-          <button className='about-task__edit'>Edite</button>
-          <button type='submit' className='about-task__edit'>
-            Submite
-          </button>
+        <div className='about-task-button__wrap'>
+          <button className='about-task__edit'></button>
+          <button type='submit' className='about-task__submit'></button>
         </div>
-        <p className='about-task__date'>12/05/22</p>
-        <input type='text' className='about-task__input' />
-        <textarea className='about-task__text' />
+        <input
+          type='text'
+          className='about-task__input'
+          defaultValue={taskItem.content}
+          readOnly
+        />
+        <textarea
+          className='about-task__text'
+          defaultValue={taskItem.description}
+          readOnly
+        />
+        <p className='about-task__date'>{taskItem.created_at}</p>
       </form>
       <p className='popup__event-message'>{props.message}</p>
     </InfoTooltip>

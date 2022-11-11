@@ -1,20 +1,17 @@
-import React from "react";
+import React from 'react';
 
 const InfoTooltip = (props) => {
+  const { isOpen, closeInfoTip, children } = props;
+
   return (
-    <div
-      className={`popup popup_type_${props.name} ${
-        props.isOpen ? "popup_on" : ""
-      }`}
-    >
+    <div className={`popup popup_type_${name} ${isOpen ? 'popup_on' : ''}`}>
+      {console.log(isOpen)}
       <button
-        className="popup__close-icone"
-        type="button"
-        onClick={props.closeAllPopups}
+        className='popup__close-icone'
+        type='button'
+        onClick={closeInfoTip}
       ></button>
-      <div className="popup__container-disclamer"> 
-      {props.children}
-      </div>
+      <div className='popup__container-disclamer'>{children}</div>
     </div>
   );
 };
