@@ -1,0 +1,30 @@
+.current-date {
+    display: flex;
+    width: 540px;
+    height: 252px;
+    background-image: url(./../../images/background_todo.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px 10px 0px 0px;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+.current-date__day {
+    font-family: 'Russo One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+}
+
+.current-date__time {
+    font-family: 'Russo One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 58px;
+    color: #FFFFFF;
+}

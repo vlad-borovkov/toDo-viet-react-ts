@@ -1,0 +1,104 @@
+.popup {
+    visibility: hidden;
+    position: fixed;
+    display: flex;
+    opacity: 0;
+    transition: 0.5s;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: -15px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* cursor: pointer; */
+}
+
+.popup_on {
+    visibility: visible;
+    position: fixed;
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.popup__close-icone {
+    z-index: 4;
+    position: relative;
+    display: block;
+    top: 37px;
+    right: -186px;
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    background-image: url(./../../images/close_icone.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
+}
+
+.popup__close-icone:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.popup__container-disclamer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 430px;
+    height: 190px;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    font-family: Inter, Arial, sans-serif;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+    z-index: 3;
+
+}
+
+.popup__image-event {
+    width: 120px;
+    height: 120px;
+}
+
+.popup__event-message {
+    width: 358px;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    color: #000000;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.about-task__wrap {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.about-task__edit {}
+
+.about-task__date {}
+
+.about-task__input {
+    width: 300px;
+    height: 35px;
+}
+
+@media screen and (max-width: 580px) and (min-width: 320px) {
+    .popup__close-icone {
+        background-image: url(./../../images/Close_Icon_mobile.svg);
+        right: 0px;
+        top: -32px;
+        width: 20px;
+        height: 20px;
+    }
+}

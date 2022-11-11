@@ -1,0 +1,38 @@
+.task-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 540px;
+    background-color: white;
+    padding: 15px;
+}
+
+.task-form__input {
+    width: 275px;
+    height: 49px;
+    background: #b7babcf2;
+    border-radius: 5px;
+    margin: 0;
+    margin-right: 10px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #888888;
+}
+
+.task-form__button {
+    background: #20EEB0;
+    border-radius: 5px;
+    width: 88px;
+    height: 49px;
+    margin: 0;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 19px;
+    color: white;
+}

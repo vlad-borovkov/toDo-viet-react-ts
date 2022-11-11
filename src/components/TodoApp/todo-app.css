@@ -1,0 +1,8 @@
+.todo-app {
+
+    max-width: 540px;
+    max-height: 844px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}

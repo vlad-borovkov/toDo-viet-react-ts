@@ -1,0 +1,103 @@
+.task-line {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid teal;
+    align-items: center;
+}
+
+.task__wrap {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.task-button__wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.task-about__wrap {
+    margin-left: 18px;
+}
+
+.task__name {
+    margin: 0;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+
+    color: #0D0D0D;
+}
+
+.task__time {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #888888;
+    margin: 0;
+}
+
+.task__delete-btn {
+    margin: 0;
+    background-image: url(./../../images/akar-icons_trash-can.svg);
+    background-repeat: no-repeat;
+    background-color: transparent;
+    width: 24px;
+    height: 24px;
+    border: 0px transparent;
+}
+
+.task-button__info {
+    margin: 0;
+    background-image: url(./../../images/info.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    width: 24px;
+    height: 24px;
+    border: 0px transparent;
+    margin-right: 20px;
+}
+
+.task-button__change-range {
+    margin: 0;
+    background-image: url(./../../images/drag.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    width: 24px;
+    height: 24px;
+    border: 0px transparent;
+}
+
+.task-button__status_pend {
+    margin: 0;
+    background-image: url(./../../images/status.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    width: 24px;
+    height: 24px;
+    border: 0px transparent;
+    margin-right: 20px;
+}
+
+.task-button__status_done {
+    margin: 0;
+    background-image: url(./../../images/status_done.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    width: 24px;
+    height: 24px;
+    border: 0px transparent;
+    margin-right: 20px;
+}
