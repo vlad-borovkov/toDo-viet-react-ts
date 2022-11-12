@@ -5,7 +5,6 @@ const InfoTooltip = (props) => {
 
   return (
     <div className={`popup popup_type_${name} ${isOpen ? 'popup_on' : ''}`}>
-      {console.log(isOpen)}
       <button
         className='popup__close-icone'
         type='button'

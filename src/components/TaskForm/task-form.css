@@ -1,10 +1,11 @@
 .task-form {
     display: flex;
+    position: relative;
     flex-direction: row;
     justify-content: center;
-    width: 540px;
+    width: 100%;
     background-color: white;
-    padding: 15px;
+    padding: 24px;
 }
 
 .task-form__input {
@@ -35,4 +36,19 @@
     font-size: 40px;
     line-height: 19px;
     color: white;
+}
+
+.form__error-message {
+    font-family: Inter, Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    text-align: center;
+    color: #FF004C;
+    position: absolute;
+    top: 67px;
+    left: 106px;
+    margin: 0;
+
 }

@@ -7,4 +7,9 @@
 @import url(./components/TaskLine/task-line.css);
 
 @import url(./components/TaskList/task-list.css);
+@import url(./components/TaskListDone/task-list-done.css);
 @import url(./components/TodoApp/todo-app.css);
+
+@import url(./components/Spinner/spinner.css);
+
+@import url(./components/OkPush/ok-push.css);

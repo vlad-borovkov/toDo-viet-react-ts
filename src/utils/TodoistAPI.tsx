@@ -6,7 +6,7 @@ class TodoistAPI {
 
   makeRequest(url: string, method = 'GET', body: any) {
     const requestUrl = this._domain + url;
-    const jwt = '8f631ee64998440c6f5d01e04dbebe6bda5dd2c1';
+    const jwt = '52606cdb5e8c921b7d3269f5d83d6b93ee1ccf2a';
 
     return fetch(requestUrl, {
       method: method,
@@ -30,9 +30,24 @@ class TodoistAPI {
     return this.makeRequest(tasksFromServer);
   }
 
+  getTaskById(taskId) {
+    const taskFromServer = `/tasks/${taskId}`;
+    return this.makeRequest(taskFromServer);
+  }
+
   closeTask(taskId) {
-    const closedTask = `/tasks/${taskId}/close`;
-    return this.makeRequest(closedTask, 'POST');
+    const requestUrl = `https://api.todoist.com/rest/v2/tasks/${taskId}/close`;
+    const jwt = '52606cdb5e8c921b7d3269f5d83d6b93ee1ccf2a';
+
+    return fetch(requestUrl, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+        'Content-Type': 'application/json',
+      },
+    }).then((response) => {
+      return response;
+    });
   }
 
   reopenTask(taskId) {
@@ -40,14 +55,24 @@ class TodoistAPI {
     return this.makeRequest(reopenedTask, 'POST');
   }
 
-  changeTaskDataById(taskId, taskData) {
+  changeTaskDataById(taskData, taskId) {
     const requestUrl = `/tasks/${taskId}`;
     return this.makeRequest(requestUrl, 'POST', taskData);
   }
 
   deleteTask(taskId) {
-    const deletedTask = `/tasks/${taskId}`;
-    return this.makeRequest(deletedTask, 'DELETE');
+    const requestUrl = `https://api.todoist.com/rest/v2/tasks/${taskId}`;
+    const jwt = '52606cdb5e8c921b7d3269f5d83d6b93ee1ccf2a';
+
+    return fetch(requestUrl, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+        'Content-Type': 'application/json',
+      },
+    }).then((response) => {
+      return response;
+    });
   }
 }
 
