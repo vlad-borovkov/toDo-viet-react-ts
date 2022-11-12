@@ -1,10 +1,16 @@
 import React from 'react';
 
-const InfoTooltip = (props) => {
+interface TProps extends React.HTMLAttributes<HTMLDivElement> {
+  isOpen: Boolean;
+  closeInfoTip: (e: React.MouseEvent) => void;
+  children: React.ReactNode;
+}
+
+const InfoTooltip: React.FC<TProps> = (props) => {
   const { isOpen, closeInfoTip, children } = props;
 
   return (
-    <div className={`popup popup_type_${name} ${isOpen ? 'popup_on' : ''}`}>
+    <div className={`popup ${isOpen ? 'popup_on' : ''}`}>
       <button
         className='popup__close-icone'
         type='button'

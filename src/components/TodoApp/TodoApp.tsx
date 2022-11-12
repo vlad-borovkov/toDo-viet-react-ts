@@ -64,7 +64,7 @@ export default function TodoApp() {
   };
   // состояние popups
   const [isOpenAboutTask, setIsOpenAboutTask] = React.useState(false);
-  const handleCloseInfoTip = () => {
+  const handleCloseInfoTip = (e: React.MouseEvent<HTMLButtonElement>) => {
     setIsOpenAboutTask(!isOpenAboutTask);
   };
 

@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { FC } from 'react';
 import InfoTooltip from './InfoTooltip';
 import { useForm } from 'react-hook-form';
 import SpinnerAbout from '../Spinner/SpinnerAbout';
 import { Input } from '@mui/material';
+import TTaskItem from './../../utils/TaskItemType';
 
-export default function AboutTask(props) {
+interface TProps {
+  isOpen: Boolean;
+  onClose: (e: React.MouseEvent) => void;
+  taskItem: TTaskItem;
+  handleChangeTask: (data: Object, string: String) => void;
+  isFetchingUpd: Boolean;
+}
+
+const AboutTask: React.FC<TProps> = (props) => {
   const { isOpen, onClose, taskItem, handleChangeTask, isFetchingUpd } = props;
 
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm({
     mode: 'onChange',
   });
@@ -21,9 +30,8 @@ export default function AboutTask(props) {
     setEditClick(!isEditClick);
   };
 
-  const handleSubmitAbout = (data) => {
+  const handleSubmitAbout = (data: Object) => {
     handleChangeTask(data, taskItem.id);
-    //setEditClick(!isEditClick); поменять на дизабледы, когда прид1т ответ от сервера
   };
 
   // подписываемся на изменение стейта с игнорированием выполнения при рендеринге
@@ -39,12 +47,7 @@ export default function AboutTask(props) {
   }, [isFetchingUpd]);
 
   return (
-    <InfoTooltip
-      name='about-task'
-      onClose='about-task-close'
-      isOpen={isOpen}
-      closeInfoTip={onClose}
-    >
+    <InfoTooltip isOpen={isOpen} closeInfoTip={onClose}>
       <form
         id='task-about'
         className='about-task__wrap'
@@ -108,4 +111,6 @@ export default function AboutTask(props) {
       </form>
     </InfoTooltip>
   );
-}
+};
+
+export default AboutTask;

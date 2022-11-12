@@ -1,6 +1,10 @@
 import React from 'react';
 
-export default function OkPush(props) {
+interface OkPushProps {
+  isFailPushOpen: Boolean;
+}
+
+export default function OkPush(props: OkPushProps) {
   const { isFailPushOpen } = props;
 
   return (
