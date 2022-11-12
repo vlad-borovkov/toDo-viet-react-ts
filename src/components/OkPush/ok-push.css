@@ -1,5 +1,8 @@
 .ok-push {
     position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     top: 20px;
     left: 38%;
     width: 300px;

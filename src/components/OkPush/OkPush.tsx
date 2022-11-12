@@ -5,7 +5,7 @@ export default function OkPush(props) {
 
   return (
     <div className={isOkPushOpen ? `ok-push` : 'ok-push_off'}>
-      OkPushMessage
+      Задача добавлена!
     </div>
   );
 }
