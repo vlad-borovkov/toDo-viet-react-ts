@@ -1,6 +1,8 @@
 import React from 'react';
 
-const SpinnerAbout = (props) => {
+interface TSpinnerAbout {}
+
+const SpinnerAbout: React.FC<TSpinnerAbout> = () => {
   return (
     <div className='spinner_about'>
       <i></i>

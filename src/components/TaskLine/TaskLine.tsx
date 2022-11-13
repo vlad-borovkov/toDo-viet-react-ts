@@ -1,22 +1,29 @@
 import React, { forwardRef } from 'react';
-import { Reorder } from 'framer-motion';
+import TTaskItem from './../../utils/TaskItemType';
 
-const TaskLine = forwardRef((props, ref) => {
+interface TTaskLine {
+  taskItem: TTaskItem;
+  handleOpenAboutTask: (taskItem: TTaskItem) => void;
+  handleDeleteClick: (taskId: String) => void;
+  handleDoneTask: (taskItem: TTaskItem) => void;
+}
+
+const TaskLine = React.forwardRef<HTMLDivElement, TTaskLine>((props, ref) => {
   const { taskItem, handleOpenAboutTask, handleDeleteClick, handleDoneTask } =
     props;
 
   const [isTaskDone, setTaskIsDone] = React.useState(false);
 
-  const handleStatusClick = () => {
+  const handleStatusClick = (e: React.MouseEvent) => {
     setTaskIsDone(!isTaskDone);
     handleDoneTask(taskItem);
   };
 
-  const handleInfoClick = () => {
+  const handleInfoClick = (e: React.MouseEvent) => {
     handleOpenAboutTask(taskItem);
   };
 
-  const handleDeleteTask = () => {
+  const handleDeleteTask = (e: React.MouseEvent) => {
     handleDeleteClick(taskItem.id);
   };
 

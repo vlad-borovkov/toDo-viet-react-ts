@@ -1,19 +1,30 @@
-import React, { FC } from 'react';
+import React, { FC, HTMLAttributes } from 'react';
 import InfoTooltip from './InfoTooltip';
 import { useForm } from 'react-hook-form';
 import SpinnerAbout from '../Spinner/SpinnerAbout';
-import { Input } from '@mui/material';
+import { Input, TextField } from '@mui/material';
 import TTaskItem from './../../utils/TaskItemType';
+import { UseFormProps } from './../../utils/TypeUseForm';
 
-interface TProps {
+type TUpdatedTask = {
+  taskTitle: String;
+  taskAbout: String;
+};
+
+interface TAboutTask {
   isOpen: Boolean;
-  onClose: (e: React.MouseEvent) => void;
+  onClose: (e: React.MouseEvent<HTMLButtonElement>) => void;
   taskItem: TTaskItem;
-  handleChangeTask: (data: Object, string: String) => void;
+  handleChangeTask: (newDataTask: TUpdatedTask, taskId: String) => void;
   isFetchingUpd: Boolean;
 }
 
-const AboutTask: React.FC<TProps> = (props) => {
+type FormValues = {
+  taskTitle: String;
+  taskAbout: String;
+};
+
+const AboutTask: React.FC<TAboutTask> = (props) => {
   const { isOpen, onClose, taskItem, handleChangeTask, isFetchingUpd } = props;
 
   const {
@@ -21,7 +32,7 @@ const AboutTask: React.FC<TProps> = (props) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({
+  } = useForm<FormValues>({
     mode: 'onChange',
   });
 
@@ -30,7 +41,7 @@ const AboutTask: React.FC<TProps> = (props) => {
     setEditClick(!isEditClick);
   };
 
-  const handleSubmitAbout = (data: Object) => {
+  const handleSubmitAbout = (data: TUpdatedTask) => {
     handleChangeTask(data, taskItem.id);
   };
 
@@ -94,7 +105,7 @@ const AboutTask: React.FC<TProps> = (props) => {
           <p className='popup__error-message'>{errors?.taskTitle?.message}</p>
         )}
         {isEditClick ? (
-          <textarea
+          <TextField
             {...register('taskAbout', {})}
             className='about-task__text'
             defaultValue={taskItem.description}

@@ -1,10 +1,10 @@
 import React from 'react';
 
-interface OkPushProps {
+interface TOkPushProps {
   isFailPushOpen: Boolean;
 }
 
-export default function OkPush(props: OkPushProps) {
+const OkPush: React.FC<TOkPushProps> = (props) => {
   const { isFailPushOpen } = props;
 
   return (
@@ -12,4 +12,6 @@ export default function OkPush(props: OkPushProps) {
       Ошибка получения данных
     </div>
   );
-}
+};
+
+export default OkPush;

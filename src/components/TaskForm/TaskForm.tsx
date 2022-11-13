@@ -3,7 +3,22 @@ import { useForm } from 'react-hook-form';
 import SpinnerForm from '../Spinner/SpinnerForm';
 import { Input, Button } from '@mui/material';
 
-export default function TaskForm(props) {
+type TNewTask = {
+  newTask: String;
+};
+
+interface TTaskForm {
+  handleAddNewTask: (data: TNewTask) => void;
+  isFetchingAdd: Boolean;
+  isFetchingDelete: Boolean;
+  isFetchingAllTask: Boolean;
+}
+
+type FormValues = {
+  newTask: String;
+};
+
+const TaskForm: React.FC<TTaskForm> = (props) => {
   const {
     handleAddNewTask,
     isFetchingAdd,
@@ -15,12 +30,12 @@ export default function TaskForm(props) {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isValid },
-  } = useForm({
+    formState: { errors },
+  } = useForm<FormValues>({
     mode: 'onChange',
   });
 
-  const handleSubmitForm = (data) => {
+  const handleSubmitForm = (data: TNewTask) => {
     handleAddNewTask(data);
     reset();
   };
@@ -56,4 +71,6 @@ export default function TaskForm(props) {
       <p className='form__error-message'>{errors?.newTask?.message}</p>
     </form>
   );
-}
+};
+
+export default TaskForm;

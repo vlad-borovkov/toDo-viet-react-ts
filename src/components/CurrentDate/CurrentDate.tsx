@@ -1,6 +1,8 @@
 import React from 'react';
 
-export default function CurrentDate() {
+interface TCurrentDate {}
+
+const CurrentDate: React.FC<TCurrentDate> = () => {
   const today = new Date();
 
   const [count, setCount] = React.useState(0);
@@ -18,4 +20,5 @@ export default function CurrentDate() {
       <div className='current-date__time'>{today.toLocaleDateString()}</div>
     </div>
   );
-}
+};
+export default CurrentDate;

@@ -2,7 +2,7 @@ import React from 'react';
 
 interface TProps extends React.HTMLAttributes<HTMLDivElement> {
   isOpen: Boolean;
-  closeInfoTip: (e: React.MouseEvent) => void;
+  closeInfoTip: (e: React.MouseEvent<HTMLButtonElement>) => void;
   children: React.ReactNode;
 }
 

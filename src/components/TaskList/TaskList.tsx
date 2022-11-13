@@ -2,8 +2,19 @@ import React from 'react';
 import TaskLine from '../TaskLine/TaskLine';
 import TaskListDone from '../TaskListDone/TaskListDone';
 import FlipMove from 'react-flip-move';
+import TTaskItem from './../../utils/TaskItemType';
 
-export default function TaskList(props) {
+interface TTaskList {
+  activeTasks: TTaskItem[];
+  handleOpenAboutTask: (taskItem: TTaskItem) => void;
+  handleDeleteClick: (taskId: String) => void;
+  handleDoneTask: (taskItem: TTaskItem) => void;
+  handleDeleteDoneClick: (taskItem: TTaskItem) => void;
+  doneTasks: TTaskItem[];
+  onUpdateDeleteTask: Boolean;
+}
+
+const TaskList: React.FC<TTaskList> = (props) => {
   const {
     activeTasks,
     handleOpenAboutTask,
@@ -39,4 +50,6 @@ export default function TaskList(props) {
       />
     </div>
   );
-}
+};
+
+export default TaskList;

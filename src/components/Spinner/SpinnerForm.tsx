@@ -1,6 +1,8 @@
 import React from 'react';
 
-const SpinnerForm = (props) => {
+interface TSpinnerForm {}
+
+const SpinnerForm: React.FC<TSpinnerForm> = () => {
   return (
     <div className='spinner_form'>
       <i></i>

@@ -7,45 +7,75 @@ import { todoistAPI } from '../../utils/TodoistAPI';
 import OkPush from '../OkPush/OkPush';
 import FailPush from '../FailPush/FailPush';
 
-export default function TodoApp() {
-  const [errorMessage, setErrorMessage] = React.useState({});
+import TTaskItem from './../../utils/TaskItemType';
+
+type TNewDataTask = {
+  taskTitle: String;
+  taskAbout: String;
+  content: String;
+  description: String;
+};
+
+type TNewTask = {
+  newTask: String;
+};
+
+type TUpdatedTask = {
+  taskTitle: String;
+  taskAbout: String;
+};
+
+const TodoApp = () => {
   //стейты для зависимости получения обновлённого массива тасков
-  const [onUpdateAboutTask, setOnUpdateAboutTask] = React.useState(false);
-  const [onUpdateAddTask, setOnUpdateAddTask] = React.useState(false);
-  const [onUpdateDeleteTask, setOnUpdateDeleteTask] = React.useState(false);
-  const [onUpdateCloseTask, setOnUpdateCloseTask] = React.useState(false);
+  const [onUpdateAboutTask, setOnUpdateAboutTask] =
+    React.useState<Boolean>(false);
+  const [onUpdateAddTask, setOnUpdateAddTask] = React.useState<Boolean>(false);
+  const [onUpdateDeleteTask, setOnUpdateDeleteTask] =
+    React.useState<Boolean>(false);
+  const [onUpdateCloseTask, setOnUpdateCloseTask] =
+    React.useState<Boolean>(false);
   // состояния для запуска спинера
-  const [isFetchingUpd, setIsFetchingUpd] = React.useState(false);
-  const [isFetchingAdd, setIsFetchingAdd] = React.useState(false);
-  const [isFetchingDelete, setIsFetchingDelete] = React.useState(false);
-  const [isFetchingAllTask, setIsFetchingAllTask] = React.useState(false);
+  const [isFetchingUpd, setIsFetchingUpd] = React.useState<Boolean>(false);
+  const [isFetchingAdd, setIsFetchingAdd] = React.useState<Boolean>(false);
+  const [isFetchingDelete, setIsFetchingDelete] =
+    React.useState<Boolean>(false);
+  const [isFetchingAllTask, setIsFetchingAllTask] =
+    React.useState<Boolean>(false);
   // состояния и функции для запуска пуша
-  const [isOkPushOpen, setIsOkPushOpen] = React.useState(false);
-  const okPush = () => {
+  const [isOkPushOpen, setIsOkPushOpen] = React.useState<Boolean>(false);
+  const okPush = (): void => {
     setIsOkPushOpen(true);
-    setTimeout(() => setIsOkPushOpen(false), 2000);
+    setTimeout((): void => setIsOkPushOpen(false), 2000);
   };
-  const [isFailPushOpen, setIsFailPushOpen] = React.useState(false);
-  const failPush = () => {
+  const [isFailPushOpen, setIsFailPushOpen] = React.useState<Boolean>(false);
+  const failPush = (): void => {
     setIsFailPushOpen(true);
-    setTimeout(() => setIsFailPushOpen(false), 2000);
+    setTimeout((): void => setIsFailPushOpen(false), 2000);
+  };
+  // состояние popup about-task
+  const [isOpenAboutTask, setIsOpenAboutTask] = React.useState<Boolean>(false);
+  const handleCloseInfoTip = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setIsOpenAboutTask(!isOpenAboutTask);
   };
 
   // получаем все активные задачи при маунте и при обновлении value задачи
-  const [activeTasks, setActiveTasks] = React.useState([]);
+  const [activeTasks, setActiveTasks] = React.useState<TTaskItem[]>([]);
   React.useEffect(() => {
     setIsFetchingAllTask(true);
     todoistAPI
       .getActiveTasks()
-      .then((data) => {
+      .then((data: TTaskItem[]) => {
         setActiveTasks(data);
         setIsFetchingAllTask(false);
       })
-      .catch((error) => setErrorMessage(error));
+      .catch((error) => {
+        failPush();
+        console.log(error);
+      });
   }, [onUpdateAboutTask, onUpdateDeleteTask, onUpdateAddTask]);
 
-  // обновляем values задачи
-  const handleChangeTask = (newDataTask, taskId) => {
+  // изменение одной таски с API по ID
+  const handleChangeTask = (newDataTask: TUpdatedTask, taskId: String) => {
     setIsFetchingUpd(true);
     todoistAPI
       .changeTaskDataById(
@@ -55,35 +85,37 @@ export default function TodoApp() {
         },
         taskId
       )
-      .then((data) => {
+      .then((data: TTaskItem) => {
         setOnUpdateAboutTask(!onUpdateAboutTask);
         setTaskItem(data);
         setIsFetchingUpd(false);
       })
-      .catch((error) => console.log(error));
-  };
-  // состояние popups
-  const [isOpenAboutTask, setIsOpenAboutTask] = React.useState(false);
-  const handleCloseInfoTip = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setIsOpenAboutTask(!isOpenAboutTask);
+      .catch((error) => {
+        failPush();
+        console.log(error);
+      });
   };
 
-  const [taskItem, setTaskItem] = React.useState({});
-  const handleOpenAboutTask = (taskItem) => {
+  // запрос одной таски с API по ID
+  const [taskItem, setTaskItem] = React.useState<TTaskItem>(Object);
+  const handleOpenAboutTask = (taskItem: TTaskItem) => {
     todoistAPI
       .getTaskById(taskItem.id)
-      .then((data) => {
+      .then((data: TTaskItem) => {
         setTaskItem(data);
         setIsOpenAboutTask(!isOpenAboutTask);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        failPush();
+        console.log(error);
+      });
   };
-
-  const handleAddNewTask = (newTaskValue) => {
+  // добавление таски
+  const handleAddNewTask = (newTaskValue: TNewTask): void => {
     setIsFetchingAdd(true);
     todoistAPI
       .addNewTask({ content: newTaskValue.newTask })
-      .then((data) => {
+      .then((data: TTaskItem) => {
         if (data.id) {
           setOnUpdateAddTask(!onUpdateAddTask);
           setIsFetchingAdd(false);
@@ -95,8 +127,9 @@ export default function TodoApp() {
         console.log(error);
       });
   };
-  // удаление из активных тасков
-  const handleDeleteTask = (taskId) => {
+
+  // удаление таски
+  const handleDeleteTask = (taskId: String) => {
     setIsFetchingDelete(true);
 
     todoistAPI
@@ -105,12 +138,16 @@ export default function TodoApp() {
         setOnUpdateDeleteTask(!onUpdateDeleteTask);
         setIsFetchingDelete(false);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        failPush();
+        console.log(error);
+      });
   };
 
-  // делаем запрос на завершение, находим завершённую таску, вытаскиваем из активного массива и переносим в массив завершённых таск
-  const [doneTasksArr, setDoneTasksArr] = React.useState([]);
-  const handleDoneTask = (taskData) => {
+  // обновляем статус таски и переносим в массив завершённых тасков. API не даёт массив завершённых, пришлось танцевать с бубном самому.
+  const [doneTasksArr, setDoneTasksArr] = React.useState<TTaskItem[]>([]);
+
+  const handleDoneTask = (taskData: TTaskItem) => {
     const currentIndexItem = activeTasks.indexOf(taskData);
 
     todoistAPI
@@ -120,14 +157,17 @@ export default function TodoApp() {
         setDoneTasksArr(doneTasksArr.concat([...newDoneTaskArr]));
         setOnUpdateCloseTask(!onUpdateCloseTask);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        failPush();
+        console.log(error);
+      });
   };
-  //удаление завершённых тасков
-  const handleDeleteDoneClick = (taskData) => {
-    const currentIndexItem = doneTasksArr.indexOf(taskData);
-    console.log(currentIndexItem);
-    doneTasksArr.splice(currentIndexItem, 1);
 
+  //удаление завершённых тасков
+  const handleDeleteDoneClick = (taskData: TTaskItem) => {
+    const currentIndexItem = doneTasksArr.indexOf(taskData);
+
+    doneTasksArr.splice(currentIndexItem, 1);
     setDoneTasksArr([...doneTasksArr]);
   };
 
@@ -150,7 +190,6 @@ export default function TodoApp() {
         handleDoneTask={handleDoneTask}
         doneTasks={doneTasksArr}
         onUpdateDeleteTask={onUpdateDeleteTask}
-        setActiveTasks={setActiveTasks}
       />
 
       <AboutTask
@@ -162,4 +201,5 @@ export default function TodoApp() {
       />
     </div>
   );
-}
+};
+export default TodoApp;

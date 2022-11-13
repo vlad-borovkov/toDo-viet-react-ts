@@ -3,7 +3,16 @@ import TaskLineDone from '../TaskLine/TaskLineDone';
 import { Typography } from '@mui/material/';
 import FlipMove from 'react-flip-move';
 
-const TaskListDone = (props) => {
+import TTaskItem from './../../utils/TaskItemType';
+
+interface TTaskListDone {
+  doneTasks: TTaskItem[];
+  handleOpenAboutTask: (taskItem: TTaskItem) => void;
+  handleDeleteClick: (taskItem: TTaskItem) => void;
+  onUpdateDeleteTask: Boolean;
+}
+
+const TaskListDone: React.FC<TTaskListDone> = (props) => {
   const {
     doneTasks,
     handleOpenAboutTask,

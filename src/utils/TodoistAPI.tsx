@@ -55,7 +55,7 @@ class TodoistAPI {
     return this.makeRequest(reopenedTask, 'POST');
   }
 
-  changeTaskDataById(taskData, taskId) {
+  changeTaskDataById(taskData: TNewDataTask, taskId: String) {
     const requestUrl = `/tasks/${taskId}`;
     return this.makeRequest(requestUrl, 'POST', taskData);
   }
